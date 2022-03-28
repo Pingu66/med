@@ -9,6 +9,5 @@ $db = new mysqli("localhost", "root","","med");
 Imię: <input type="text" name="firstName">
 Nazwisko: <input type="text" name="lastName">
 Telefon: <input type="text" name="phone">
-test
 <input type="submit" value="Zapisz wizytę">
 </form>
