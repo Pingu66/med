@@ -1,35 +1,34 @@
 <?php
 
-$db = new mysqli("localhost", "root","","med");
+$db = new mysqli("localhost", "root", "", "med");
 
 $q = $db->prepare("SELECT * FROM staff");
-
-if($q->execute()){
-    //ta czesc wykona sie jesli kwerenda bedzie poprwanie przetworzona przez serwer
+if($q && $q->execute()) {  
     $result = $q->get_result();
-    while($row = $result->fetch_assoc()){
-        $staff_id = $row['id'];
-        $firstName = $row['firstName'];
-        $lastName = $row['lastName'];
+    while($staff = $result->fetch_assoc()) {
+        $staffId = $staff['id'];
+        $firstName = $staff['firstName'];
+        $lastName = $staff['lastName'];
         echo "Lekarz $firstName $lastName<br>";
-        $q = $db->prepare("SELECT * FROM schedule WHERE staff_id = ?");
-        $q->bind_param("i", $staff_id);
-        if($q->execute()) {
-            $schedule = $q->get_result();
-            while($visit = $schedule->fetch_assoc()) {
-                $timestamp = strtotime($visit['date']);
-                echo "<button style=\"margin:10px;\">";
-                echo date("j/m/Y H:i", $timestamp);
-                echo "</button>";
+        $q = $db->prepare("SELECT * FROM appointment WHERE staff_id = ?");
+        $q->bind_param("i", $staffId);
+        if($q && $q->execute()) {
+            $appointments = $q->get_result();
+            while($appointment = $appointments->fetch_assoc()) {     
+                $appointmentId = $appointment['id'];
+                $appointmentDate = $appointment['date'];
+                $appointmentTimestamp = strtotime($appointmentDate);
+                echo "<a href=\"appointment.php?id=$appointmentId\" style=\"margin:10px; display:block\">";
+                echo date("j.m H:i", $appointmentTimestamp);
+                echo "</a>";
             }
-            
+            echo "<br>";
+        } else {
+            die("Błąd pobierania wizyt z bazy danych");
         }
-        echo "<br>";
     }
 } else {
-    echo "bład podczas wyszukiwania w bazie danych";
+    die("Błąd pobierania lekarzy z bazy danych");
 }
-
-
 
 ?>
