@@ -28,7 +28,6 @@ if(isset($_REQUEST['firstName']) && isset($_REQUEST['lastName'])
         Telefon: <input type="text" name="phone">
         <input type="hidden" value="<?php echo $appointmentId ?>" name="id">
         <input type="submit" value="Zapisz wizytę">
-        <input type="text">
         </form>
     <?php
 
