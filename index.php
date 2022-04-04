@@ -3,7 +3,7 @@
 $db = new mysqli("localhost", "root", "", "med");
 
 $q = $db->prepare("SELECT * FROM staff");
-if($q && $q->execute()) {  
+if($q && $q->execute()) {
     $result = $q->get_result();
     while($staff = $result->fetch_assoc()) {
         $staffId = $staff['id'];
@@ -14,11 +14,11 @@ if($q && $q->execute()) {
         $q->bind_param("i", $staffId);
         if($q && $q->execute()) {
             $appointments = $q->get_result();
-            while($appointment = $appointments->fetch_assoc()) {     
+            while($appointment = $appointments->fetch_assoc()) {
                 $appointmentId = $appointment['id'];
                 $appointmentDate = $appointment['date'];
                 $appointmentTimestamp = strtotime($appointmentDate);
-                echo "<a href=\"appointment.php?id=$appointmentId\" style=\"margin:10px; display:block\">";
+                echo "<a href=\"patientLogin.php?id=$appointmentId\" style=\"margin:10px; display:block\">";
                 echo date("j.m H:i", $appointmentTimestamp);
                 echo "</a>";
             }
