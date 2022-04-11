@@ -1,4 +1,5 @@
 <?php
+//otrzymane z index php po kliknięciu terminu wizyty
 $appointmentId = $_REQUEST['id'];
 
 ?>
@@ -7,7 +8,7 @@ $appointmentId = $_REQUEST['id'];
     <div style="flex-grow:1; text-align:center">
     <h1>Zaloguj się</h1>
     <form action="appointment.php" method="post">
-        <label for="pesel">Pesel:</label><br>
+        <label for="pesel">PESEL:</label><br>
         <input type="text" name="pesel" id="pesel"><br>
         <label for="phone">Numer telefonu:</label><br>
         <input type="text" name="phone" id="phone"><br>
@@ -23,7 +24,7 @@ $appointmentId = $_REQUEST['id'];
         <input type="text" name="firstName" id="firstName"><br>
         <label for="lastName">Nazwisko:</label><br>
         <input type="text" name="lastName" id="lastName"><br>
-        <label for="pesel">Pesel:</label><br>
+        <label for="pesel">PESEL:</label><br>
         <input type="text" name="pesel" id="pesel"><br>
         <label for="phone">Numer telefonu:</label><br>
         <input type="text" name="phone" id="phone"><br>
